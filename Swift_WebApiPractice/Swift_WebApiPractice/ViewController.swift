@@ -7,13 +7,32 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
 
+    private let keyword: String = "swift"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.fetchRepositories()
     }
 
-
+    private func fetchRepositories() {
+        let cliant = GitHubCliant()
+        let request = GitHubAPI.SearchRepositories(keyword: self.keyword)
+        
+        cliant.send(request: request) { result in
+            switch result {
+            case let .success(response):
+                response.items.forEach { item in
+                    print(item.owner.login + "/" + item.name)
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
 }
 

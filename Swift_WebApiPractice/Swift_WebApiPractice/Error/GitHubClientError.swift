@@ -6,7 +6,7 @@
 //  Copyright © 2019 一木 英希. All rights reserved.
 //
 
-enum GitHubCliantError: Error {
+enum GitHubClientError: Error {
     //通信失敗
     case connectionError(Error)
     //レスポンスの解釈失敗
